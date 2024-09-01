@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.ui.components.rating
+package tandera.hackerspace.midnightcafe.ui.components.recipe.rating
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.width
@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import tandera.hackerspace.midnightcafe.R
 
 @Composable
-fun Star(modifier: Modifier = Modifier) {
+internal fun Star(modifier: Modifier = Modifier) {
     return Image(
         painter = painterResource(id = R.drawable.star),
         contentDescription = "Rating star",
