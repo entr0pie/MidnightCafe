@@ -24,8 +24,25 @@ internal fun RecipeFooter(title: String, score: Score, modifier: Modifier = Modi
     }
 }
 
+@Composable
+internal fun RecipeFooter(title: String, modifier: Modifier = Modifier) {
+    Box(modifier) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
+            Text(text = title, color = Color.White)
+        }
+    }
+}
+
 @Preview
 @Composable
-private fun RecipeFooter() {
+private fun NameAndScoreRecipeFooter() {
     RecipeFooter("Red Velvet", Score.FIVE)
+}
+
+@Preview
+@Composable
+private fun OnlyNameRecipeFooter() {
+    RecipeFooter("Red Velvet")
 }
