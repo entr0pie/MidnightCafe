@@ -24,15 +24,15 @@ private val COLORS = ButtonColors(
 @Composable
 fun LoveItButton(
     onClick: () -> Unit = {},
-) = ActionButton(image = R.drawable.heart_icon, imageDescription = "Love it!", onClick = onClick)
+) = RoundButtonWithImage(image = R.drawable.heart_icon, imageDescription = "Love it!", onClick = onClick)
 
 @Composable
-fun DiscardButton(
+fun HateItButton(
     onClick: () -> Unit = {},
-) = ActionButton(image = R.drawable.cross_icon, imageDescription = "Hate it!", onClick = onClick)
+) = RoundButtonWithImage(image = R.drawable.cross_icon, imageDescription = "Hate it!", onClick = onClick)
 
 @Composable
-private fun ActionButton(
+private fun RoundButtonWithImage(
     @DrawableRes image: Int,
     imageDescription: String,
     imageSize: Dp = 48.dp,
@@ -56,6 +56,6 @@ private fun PreviewLoveItButton() {
 
 @Preview
 @Composable
-private fun PreviewDiscardButton() {
-    DiscardButton()
+private fun PreviewHateItButton() {
+    HateItButton()
 }
