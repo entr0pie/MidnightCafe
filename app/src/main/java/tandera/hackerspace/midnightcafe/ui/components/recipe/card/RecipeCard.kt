@@ -11,6 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import tandera.hackerspace.midnightcafe.R
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
@@ -21,7 +23,9 @@ fun RecipeCard(
     score: Score,
     @DrawableRes image: Int,
     imageDescription: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    titleSize: TextUnit = TextUnit.Unspecified,
+    starSize: Dp = 12.dp,
 ) {
     Box(
         modifier = modifier.clip(RoundedCornerShape(20.dp))
@@ -29,7 +33,10 @@ fun RecipeCard(
         RecipeImage(image, imageDescription)
         RecipeFade()
         RecipeFooter(
-            title = title, score = score,
+            title = title,
+            score = score,
+            titleSize = titleSize,
+            starSize = starSize,
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .padding(8.dp)

@@ -8,18 +8,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
 import tandera.hackerspace.midnightcafe.ui.components.recipe.rating.Rating
 
 @Composable
-internal fun RecipeFooter(title: String, score: Score, modifier: Modifier = Modifier) {
+internal fun RecipeFooter(
+    title: String,
+    score: Score,
+    modifier: Modifier = Modifier,
+    titleSize: TextUnit = TextUnit.Unspecified,
+    starSize: Dp = 12.dp
+) {
     Box(modifier) {
         Column(
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
-            Text(text = title, color = Color.White)
-            Rating(score = score)
+            Text(text = title, color = Color.White, fontSize = titleSize)
+            Rating(score = score, starSize = starSize)
         }
     }
 }
