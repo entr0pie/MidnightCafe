@@ -24,20 +24,28 @@ private val COLORS = ButtonColors(
 @Composable
 fun LoveItButton(
     onClick: () -> Unit = {},
-) = RoundButtonWithImage(image = R.drawable.heart_icon, imageDescription = "Love it!", onClick = onClick)
+) = RoundButtonWithImage(
+    image = R.drawable.heart_icon,
+    imageDescription = "Love it!",
+    onClick = onClick
+)
 
 @Composable
 fun HateItButton(
     onClick: () -> Unit = {},
-) = RoundButtonWithImage(image = R.drawable.cross_icon, imageDescription = "Hate it!", onClick = onClick)
+) = RoundButtonWithImage(
+    image = R.drawable.cross_icon,
+    imageDescription = "Hate it!",
+    onClick = onClick
+)
 
 @Composable
 private fun RoundButtonWithImage(
     @DrawableRes image: Int,
     imageDescription: String,
-    imageSize: Dp = 48.dp,
+    imageSize: Dp = 84.dp,
     onClick: () -> Unit,
-    size: Dp = 64.dp,
+    size: Dp = 128.dp,
 ) {
     RoundButton(onClick = onClick, size = size, colors = COLORS) {
         Image(
