@@ -1,6 +1,7 @@
 package tandera.hackerspace.midnightcafe.ui.screens.tinder
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,11 +19,12 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import tandera.hackerspace.midnightcafe.R
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
 import tandera.hackerspace.midnightcafe.ui.components.recipe.buttons.HateItButton
 import tandera.hackerspace.midnightcafe.ui.components.recipe.buttons.LoveItButton
-import tandera.hackerspace.midnightcafe.ui.components.recipe.card.RecipeCard
+import tandera.hackerspace.midnightcafe.ui.components.recipe.card.RoundedRecipeCard
 import tandera.hackerspace.midnightcafe.ui.models.RecipeModel
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
 
@@ -50,7 +52,7 @@ val RECIPES = listOf(
 )
 
 @Composable
-fun TinderScreen(modifier: Modifier = Modifier) {
+fun TinderScreen(navController: NavController, modifier: Modifier = Modifier) {
     var currentIndex by remember { mutableStateOf(0) }
 
     fun updateIndex() {
@@ -73,7 +75,7 @@ fun TinderScreen(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box {
-                Card(recipe = RECIPES[currentIndex])
+                Card(navController, recipe = RECIPES[currentIndex])
             }
 
             Row(
@@ -90,15 +92,18 @@ fun TinderScreen(modifier: Modifier = Modifier) {
 
 
 @Composable
-private fun Card(recipe: RecipeModel, modifier: Modifier = Modifier) {
-    RecipeCard(
+private fun Card(navController: NavController, recipe: RecipeModel, modifier: Modifier = Modifier) {
+    RoundedRecipeCard(
         recipe.title,
         recipe.score,
         recipe.image,
         recipe.imageDescription,
         modifier = modifier
             .fillMaxWidth(0.90f)
-            .fillMaxHeight(0.60f),
+            .fillMaxHeight(0.60f)
+            .clickable {
+                navController.navigate("details")
+            },
         titleSize = 32.sp,
         starSize = 24.dp
     )

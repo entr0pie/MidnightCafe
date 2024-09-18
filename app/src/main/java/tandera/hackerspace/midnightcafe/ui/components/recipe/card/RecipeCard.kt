@@ -27,9 +27,7 @@ fun RecipeCard(
     titleSize: TextUnit = TextUnit.Unspecified,
     starSize: Dp = 12.dp,
 ) {
-    Box(
-        modifier = modifier.clip(RoundedCornerShape(20.dp))
-    ) {
+    Box(modifier = modifier) {
         RecipeImage(image, imageDescription)
         RecipeFade()
         RecipeFooter(
@@ -42,6 +40,27 @@ fun RecipeCard(
                 .padding(16.dp)
         )
     }
+}
+
+@Composable
+fun RoundedRecipeCard(
+    title: String,
+    score: Score,
+    @DrawableRes image: Int,
+    imageDescription: String,
+    modifier: Modifier = Modifier,
+    titleSize: TextUnit = TextUnit.Unspecified,
+    starSize: Dp = 12.dp,
+) {
+    RecipeCard(
+        title,
+        score,
+        image,
+        imageDescription,
+        modifier = modifier.clip(RoundedCornerShape(20.dp)),
+        titleSize = titleSize,
+        starSize = starSize
+    )
 }
 
 @Preview
