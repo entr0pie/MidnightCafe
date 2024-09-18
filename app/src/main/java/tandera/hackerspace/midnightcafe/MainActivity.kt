@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import tandera.hackerspace.midnightcafe.ui.components.common.MainTopBar
-import tandera.hackerspace.midnightcafe.ui.screens.TinderScreen
+import tandera.hackerspace.midnightcafe.ui.screens.tinder.TinderScreen
 import tandera.hackerspace.midnightcafe.ui.theme.MidnightCafeTheme
 
 class MainActivity : ComponentActivity() {
