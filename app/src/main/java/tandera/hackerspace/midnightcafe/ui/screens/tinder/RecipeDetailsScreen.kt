@@ -19,7 +19,7 @@ import androidx.navigation.NavController
 import tandera.hackerspace.midnightcafe.R
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
 import tandera.hackerspace.midnightcafe.ui.components.common.VerticalList
-import tandera.hackerspace.midnightcafe.ui.components.common.bars.MainTopBar
+import tandera.hackerspace.midnightcafe.ui.components.common.bars.TopBarWithArrowBack
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.RecipeCard
 import tandera.hackerspace.midnightcafe.ui.components.recipe.comment.RecipeCommentCard
 import tandera.hackerspace.midnightcafe.ui.models.RecipeCommentModel
@@ -29,7 +29,13 @@ import tandera.hackerspace.midnightcafe.ui.theme.Palette
 fun RecipeDetailsScreen(navController: NavController) {
 
     Scaffold(
-        topBar = { MainTopBar() },
+        topBar = {
+            TopBarWithArrowBack(onReturnClick = {
+                navController.popBackStack()
+            }) {
+                Text(text = "Recipe: Red Velvet")
+            }
+        },
     ) { innerPadding ->
         Box(
             modifier = Modifier
