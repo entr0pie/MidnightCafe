@@ -48,7 +48,7 @@ fun TinderScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box {
-                Card(navController, recipe = currentRecipe)
+                PolishedCard(navController, recipe = currentRecipe)
             }
 
             Row(
@@ -65,7 +65,11 @@ fun TinderScreen(
 
 
 @Composable
-private fun Card(navController: NavController, recipe: RecipeModel, modifier: Modifier = Modifier) {
+private fun PolishedCard(
+    navController: NavController,
+    recipe: RecipeModel,
+    modifier: Modifier = Modifier
+) {
     RoundedRecipeCard(
         recipe.title,
         recipe.score,
