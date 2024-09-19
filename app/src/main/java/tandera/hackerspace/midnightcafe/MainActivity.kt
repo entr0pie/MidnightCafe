@@ -7,8 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -16,7 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import tandera.hackerspace.midnightcafe.services.http.RecipeHttpStepper
-import tandera.hackerspace.midnightcafe.ui.components.common.MainTopBar
+import tandera.hackerspace.midnightcafe.ui.screens.profile.ProfileScreen
 import tandera.hackerspace.midnightcafe.ui.screens.tinder.RecipeDetailsScreen
 import tandera.hackerspace.midnightcafe.ui.screens.tinder.TinderScreen
 import tandera.hackerspace.midnightcafe.ui.theme.MidnightCafeTheme
@@ -26,18 +24,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             MidnightCafeTheme {
-                Box(modifier = Modifier
-                    .fillMaxSize()
-                    .background(Palette.Lavender)) {
-                    Scaffold(
-                        topBar = { MainTopBar() }
-                    ) { innerPadding ->
-                        Box(modifier = Modifier.padding(innerPadding)) {
-                            NavigationGraph()
-                        }
-                    }
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Palette.Lavender)
+                ) {
+                    NavigationGraph()
                 }
             }
         }
@@ -49,5 +44,6 @@ fun NavigationGraph(navController: NavHostController = rememberNavController()) 
     NavHost(navController = navController, startDestination = "tinder") {
         composable("tinder") { TinderScreen(navController, RecipeHttpStepper()) }
         composable("details") { RecipeDetailsScreen(navController) }
+        composable("profile") { ProfileScreen(navController) }
     }
 }

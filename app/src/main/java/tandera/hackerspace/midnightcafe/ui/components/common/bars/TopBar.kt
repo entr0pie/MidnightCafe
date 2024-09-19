@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.ui.components.common
+package tandera.hackerspace.midnightcafe.ui.components.common.bars
 
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api

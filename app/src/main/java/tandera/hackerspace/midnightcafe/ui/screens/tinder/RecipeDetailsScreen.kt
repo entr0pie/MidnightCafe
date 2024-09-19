@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,6 +19,7 @@ import androidx.navigation.NavController
 import tandera.hackerspace.midnightcafe.R
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
 import tandera.hackerspace.midnightcafe.ui.components.common.VerticalList
+import tandera.hackerspace.midnightcafe.ui.components.common.bars.MainTopBar
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.RecipeCard
 import tandera.hackerspace.midnightcafe.ui.components.recipe.comment.RecipeCommentCard
 import tandera.hackerspace.midnightcafe.ui.models.RecipeCommentModel
@@ -25,35 +27,40 @@ import tandera.hackerspace.midnightcafe.ui.theme.Palette
 
 @Composable
 fun RecipeDetailsScreen(navController: NavController) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Palette.Lavender),
-    ) {
-        LazyColumn {
-            item {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.40f)
-                ) {
-                    RecipeCard(
-                        "Red Velvet",
-                        Score.FIVE,
-                        R.drawable.red_velvet,
-                        "A sliced piece of Red Velvet.",
-                        titleSize = 32.sp,
-                        starSize = 18.dp
-                    )
-                }
-            }
 
-            item { CommentCarousel() }
-            item { IngredientsList() }
-            item { RecipeStepsList() }
+    Scaffold(
+        topBar = { MainTopBar() },
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Palette.Lavender)
+                .padding(innerPadding),
+        ) {
+            LazyColumn {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(0.40f)
+                    ) {
+                        RecipeCard(
+                            "Red Velvet",
+                            Score.FIVE,
+                            R.drawable.red_velvet,
+                            "A sliced piece of Red Velvet.",
+                            titleSize = 32.sp,
+                            starSize = 18.dp
+                        )
+                    }
+                }
+
+                item { CommentCarousel() }
+                item { IngredientsList() }
+                item { RecipeStepsList() }
+            }
         }
     }
-
 }
 
 @Composable

@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import tandera.hackerspace.midnightcafe.services.Stepper
+import tandera.hackerspace.midnightcafe.ui.components.common.bars.BottomBar
+import tandera.hackerspace.midnightcafe.ui.components.common.bars.MainTopBar
 import tandera.hackerspace.midnightcafe.ui.components.recipe.buttons.HateItButton
 import tandera.hackerspace.midnightcafe.ui.components.recipe.buttons.LoveItButton
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.RoundedRecipeCard
@@ -37,27 +41,38 @@ fun TinderScreen(
 ) {
     var currentRecipe by remember { mutableStateOf(stepper.current()) }
 
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(Palette.Lavender),
-        contentAlignment = CARD_ALIGNMENT
-    ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(48.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box {
-                PolishedCard(navController, recipe = currentRecipe)
+    Scaffold(
+        topBar = { MainTopBar() },
+        bottomBar = {
+            BottomBar() {
+                navController.navigate("profile")
             }
-
-            Row(
-                modifier = Modifier.fillMaxWidth(0.85f),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+        },
+    ) { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            Box(
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(Palette.Lavender),
+                contentAlignment = CARD_ALIGNMENT
             ) {
-                HateItButton(onClick = { currentRecipe = stepper.step() })
-                LoveItButton(onClick = { currentRecipe = stepper.step() })
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(48.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Box {
+                        PolishedCard(navController, recipe = currentRecipe)
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(0.85f),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        HateItButton(onClick = { currentRecipe = stepper.step() })
+                        LoveItButton(onClick = { currentRecipe = stepper.step() })
+                    }
+                }
             }
         }
     }
