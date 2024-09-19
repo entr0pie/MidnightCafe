@@ -33,12 +33,16 @@ internal fun RecipeFooter(
 }
 
 @Composable
-internal fun RecipeFooter(title: String, modifier: Modifier = Modifier) {
+internal fun RecipeFooter(
+    title: String,
+    modifier: Modifier = Modifier,
+    titleSize: TextUnit = TextUnit.Unspecified,
+) {
     Box(modifier) {
         Column(
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
-            Text(text = title, color = Color.White)
+            Text(text = title, color = Color.White, fontSize = titleSize)
         }
     }
 }

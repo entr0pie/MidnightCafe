@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import tandera.hackerspace.midnightcafe.R
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
+import tandera.hackerspace.midnightcafe.ui.models.RecipeModel
 
 @Composable
 fun RecipeCard(
@@ -40,6 +41,60 @@ fun RecipeCard(
                 .padding(16.dp)
         )
     }
+}
+
+@Composable
+fun OnlyTitleRecipeCard(
+    title: String,
+    @DrawableRes image: Int,
+    imageDescription: String,
+    modifier: Modifier = Modifier,
+    titleSize: TextUnit = TextUnit.Unspecified,
+) {
+    Box(modifier = modifier) {
+        RecipeImage(image, imageDescription)
+        RecipeFade()
+        RecipeFooter(
+            title = title,
+            titleSize = titleSize,
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(16.dp)
+        )
+    }
+}
+
+@Composable
+fun OnlyTitleRecipeCard(
+    recipeModel: RecipeModel,
+    modifier: Modifier = Modifier,
+    titleSize: TextUnit = TextUnit.Unspecified,
+) {
+    OnlyTitleRecipeCard(
+        title = recipeModel.title,
+        image = recipeModel.image,
+        imageDescription = recipeModel.imageDescription,
+        modifier = modifier,
+        titleSize = titleSize
+    )
+}
+
+@Composable
+fun RecipeCard(
+    recipeModel: RecipeModel,
+    modifier: Modifier = Modifier,
+    titleSize: TextUnit = TextUnit.Unspecified,
+    starSize: Dp = 12.dp,
+) {
+    RecipeCard(
+        title = recipeModel.title,
+        score = recipeModel.score,
+        image = recipeModel.image,
+        imageDescription = recipeModel.imageDescription,
+        modifier = modifier,
+        titleSize = titleSize,
+        starSize = starSize
+    )
 }
 
 @Composable

@@ -5,7 +5,7 @@ import tandera.hackerspace.midnightcafe.services.LoopStepper
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
 import tandera.hackerspace.midnightcafe.ui.models.RecipeModel
 
-private val RECIPES = listOf(
+val RECIPES = listOf(
     RecipeModel(
         "Red Velvet",
         Score.FIVE,
