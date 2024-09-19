@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import tandera.hackerspace.midnightcafe.services.http.RecipeHttpStepper
 import tandera.hackerspace.midnightcafe.ui.components.common.MainTopBar
 import tandera.hackerspace.midnightcafe.ui.screens.tinder.RecipeDetailsScreen
 import tandera.hackerspace.midnightcafe.ui.screens.tinder.TinderScreen
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NavigationGraph(navController: NavHostController = rememberNavController()) {
     NavHost(navController = navController, startDestination = "tinder") {
-        composable("tinder") { TinderScreen(navController) }
+        composable("tinder") { TinderScreen(navController, RecipeHttpStepper()) }
         composable("details") { RecipeDetailsScreen(navController) }
     }
 }

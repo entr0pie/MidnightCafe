@@ -20,8 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import tandera.hackerspace.midnightcafe.R
-import tandera.hackerspace.midnightcafe.ui.components.common.Score
+import tandera.hackerspace.midnightcafe.services.Stepper
 import tandera.hackerspace.midnightcafe.ui.components.recipe.buttons.HateItButton
 import tandera.hackerspace.midnightcafe.ui.components.recipe.buttons.LoveItButton
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.RoundedRecipeCard
@@ -30,39 +29,13 @@ import tandera.hackerspace.midnightcafe.ui.theme.Palette
 
 val CARD_ALIGNMENT: Alignment = BiasAlignment(0f, -0.8f)
 
-val RECIPES = listOf(
-    RecipeModel(
-        "Red Velvet",
-        Score.FIVE,
-        R.drawable.red_velvet,
-        "A sliced piece of Red Velvet."
-    ),
-    RecipeModel(
-        "Tiramisu",
-        Score.THREE,
-        R.drawable.tiramisu,
-        "A sliced piece of Tiramisu."
-    ),
-    RecipeModel(
-        "Brigadeiro",
-        Score.FIVE,
-        R.drawable.brigadeiro,
-        "A common brigadeiro."
-    )
-)
-
 @Composable
-fun TinderScreen(navController: NavController, modifier: Modifier = Modifier) {
-    var currentIndex by remember { mutableStateOf(0) }
-
-    fun updateIndex() {
-        if (currentIndex == RECIPES.size - 1) {
-            currentIndex = 0
-            return
-        }
-
-        currentIndex++
-    }
+fun TinderScreen(
+    navController: NavController,
+    stepper: Stepper<RecipeModel>,
+    modifier: Modifier = Modifier
+) {
+    var currentRecipe by remember { mutableStateOf(stepper.current()) }
 
     Box(
         modifier = modifier
@@ -75,7 +48,7 @@ fun TinderScreen(navController: NavController, modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box {
-                Card(navController, recipe = RECIPES[currentIndex])
+                Card(navController, recipe = currentRecipe)
             }
 
             Row(
@@ -83,8 +56,8 @@ fun TinderScreen(navController: NavController, modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                HateItButton(onClick = { updateIndex() })
-                LoveItButton(onClick = { updateIndex() })
+                HateItButton(onClick = { currentRecipe = stepper.step() })
+                LoveItButton(onClick = { currentRecipe = stepper.step() })
             }
         }
     }
