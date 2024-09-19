@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,13 +22,6 @@ import androidx.compose.ui.unit.sp
 import tandera.hackerspace.midnightcafe.ui.models.RecipeCommentModel
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
 
-private val CARD_COLORS = CardColors(
-    Palette.Lavender,
-    Palette.Jet,
-    Palette.Timberwolf,
-    Palette.Jet
-)
-
 @Composable
 fun RecipeCommentCard(
     recipeComment: RecipeCommentModel,
@@ -37,7 +29,7 @@ fun RecipeCommentCard(
     commentSize: TextUnit = 18.sp,
     authorSize: TextUnit = 12.sp
 ) {
-    Card(modifier = modifier, colors = CARD_COLORS) {
+    Card(modifier = modifier, colors = Palette.CARD_COLORS) {
         Column(
             modifier = Modifier
                 .fillMaxSize()

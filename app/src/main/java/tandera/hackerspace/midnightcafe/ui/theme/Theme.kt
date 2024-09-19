@@ -14,14 +14,16 @@ private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
     tertiary = Pink80,
-    background = Palette.Lavender
+    background = Palette.Lavender,
+    onBackground = Palette.Lavender,
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Palette.MistyRose,
     secondary = Palette.Lavender,
     tertiary = Palette.MintyGreen,
-    background = Palette.Lavender
+    background = Palette.Lavender,
+    onBackground = Palette.Lavender,
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

@@ -1,5 +1,6 @@
 package tandera.hackerspace.midnightcafe.ui.theme
 
+import androidx.compose.material3.CardColors
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -21,4 +22,6 @@ object Palette {
     val Jet = Color(0xFF333333)
     val Bittersweet = Color(0xFFFF6961)
     val LightOrange = Color(0xFFFFDAB9)
+
+    val CARD_COLORS = CardColors(MistyRose, Jet, Timberwolf, Jet)
 }
