@@ -72,9 +72,9 @@ fun RecipeDetailsScreen(navController: NavController) {
 @Composable
 fun CommentCarousel() {
     val comments = listOf(
-        RecipeCommentModel("A work of art!", "Da Vinci"),
-        RecipeCommentModel("Made my mind blow. Literally.", "JFK"),
-        RecipeCommentModel("Sliced", "Renato Cariani")
+        RecipeCommentModel("Um dos melhores bolos que já experimentei!", "Leonardo Da Vinci"),
+        RecipeCommentModel("Um excelente bolo.", "Presidente da República"),
+        RecipeCommentModel("Uma receita ótima para hipertrofia!", "Renato Cariani")
     )
 
     LazyRow(
@@ -95,9 +95,15 @@ fun CommentCarousel() {
 @Composable
 fun IngredientsList() {
     val ingredients = listOf(
-        "1 pitada de sal",
-        "2kg de farinha",
-        "muuuitos morangos"
+        "3 colheres (sopa) de manteiga",
+        "2 e 1/2 colheres (sopa) de chocolate em pó",
+        "4 ovos",
+        "1 xícara e 1/2 colher (sopa) de farinha de trigo",
+        "1/2 colher (chá) de vinagre branco",
+        "100 ml de leite aquecido",
+        "1 e 1/2 colher (sopa) de corante vermelho em gel",
+        "1 e 1/4 de xícara de açúcar",
+        "1/2 colher (sopa) de fermento em pó",
     )
 
     VerticalList(
@@ -114,9 +120,13 @@ fun IngredientsList() {
 @Composable
 fun RecipeStepsList() {
     val steps = listOf(
-        "aqueca o forno em 200 graus celsius",
-        "amasse os melhores morangos em um pote",
-        "pegue dois ovos e retire a gema"
+        "Despeje o leite já aquecido na panela, acrescente a manteiga e misture.",
+        "Coloque o chocolate em pó e deixe em fogo médio até a manteiga derreter completamente.",
+        "Desligue o fogo, coloque o corante, misture e reserve.",
+        "Na batedeira, despeje os ovos e o açúcar a bata até dobrar de volume.",
+        "Adicione o farinha e o fermento e misture bem.",
+        "Depois, acrescente a mistura com a corante aos poucos e mexa mais.",
+        "Despeje a massa numa forma redonda e leve ao forno preaquecido a 180 graus por 40 minutos."
     )
 
     VerticalList(
