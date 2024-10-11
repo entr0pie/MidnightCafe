@@ -1,5 +1,6 @@
 package tandera.hackerspace.midnightcafe.ui.components.common.bars
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,25 +16,51 @@ import androidx.compose.ui.unit.dp
 import tandera.hackerspace.midnightcafe.R
 
 @Composable
-fun BottomBar(modifier: Modifier = Modifier, onProfileClick: () -> Unit = {}) {
+fun BottomBar(
+    modifier: Modifier = Modifier,
+    onProfileClick: () -> Unit = {},
+    onManagementClick: () -> Unit = {}
+) {
     BottomAppBar {
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .padding(4.dp),
-            horizontalArrangement = Arrangement.End
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
+            ManagementButton(onClick = onManagementClick)
             ProfileButton(onClick = onProfileClick)
         }
     }
 }
 
 @Composable
-fun ProfileButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun ManagementButton(modifier: Modifier = Modifier, onClick: () -> Unit) = BarButton(
+    image = R.drawable.mangement_icon,
+    description = "Manage some recipes",
+    modifier = modifier,
+    onClick = onClick
+)
+
+@Composable
+fun ProfileButton(modifier: Modifier = Modifier, onClick: () -> Unit) = BarButton(
+    image = R.drawable.heart_icon,
+    description = "Enter into the profile",
+    modifier = modifier,
+    onClick = onClick
+)
+
+@Composable
+fun BarButton(
+    @DrawableRes image: Int,
+    description: String,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
     Image(
-        painter = painterResource(id = R.drawable.heart_icon),
-        contentDescription = "Enter into the profile",
-        modifier = Modifier.clickable { onClick() }
+        painter = painterResource(id = image),
+        contentDescription = description,
+        modifier = modifier.clickable { onClick() }
     )
 }
 

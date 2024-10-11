@@ -44,9 +44,10 @@ fun TinderScreen(
     Scaffold(
         topBar = { MainTopBar() },
         bottomBar = {
-            BottomBar() {
-                navController.navigate("profile")
-            }
+            BottomBar(
+                onProfileClick = { navController.navigate("profile") },
+                onManagementClick = { navController.navigate("management") }
+            )
         },
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
