@@ -1,5 +1,6 @@
 package tandera.hackerspace.midnightcafe.ui.theme
 
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.CardColors
 import androidx.compose.ui.graphics.Color
 
@@ -24,4 +25,5 @@ object Palette {
     val LightOrange = Color(0xFFFFDAB9)
 
     val CARD_COLORS = CardColors(MistyRose, Jet, Timberwolf, Jet)
+    val DESTRUCTIVE_BUTTON_COLORS = ButtonColors(Bittersweet, Jet, Timberwolf, Jet)
 }
