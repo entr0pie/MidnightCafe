@@ -16,10 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import tandera.hackerspace.midnightcafe.services.http.RECIPES
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.TopBarWithArrowBack
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.OnlyTitleRecipeCard
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
+import tandera.hackerspace.midnightcafe.util.RECIPES
 
 @Composable
 fun ProfileScreen(navController: NavController) {
@@ -50,7 +50,7 @@ fun ProfileScreen(navController: NavController) {
                 ) {
                     items(RECIPES) { recipe ->
                         OnlyTitleRecipeCard(
-                            recipeModel = recipe,
+                            recipe = recipe,
                             modifier = Modifier
                                 .height(128.dp)
                                 .padding(0.dp, 2.dp)

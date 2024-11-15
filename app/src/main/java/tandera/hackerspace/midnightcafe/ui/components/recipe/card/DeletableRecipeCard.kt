@@ -24,20 +24,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import tandera.hackerspace.midnightcafe.R
-import tandera.hackerspace.midnightcafe.ui.models.RecipeModel
+import tandera.hackerspace.midnightcafe.data.Recipe
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
 
 @Composable
 fun DeletableRecipeCard(
-    recipeModel: RecipeModel,
+    recipe: Recipe,
     modifier: Modifier = Modifier,
     titleSize: TextUnit = TextUnit.Unspecified,
     onDelete: () -> Unit = {},
 ) {
     DeletableRecipeCard(
-        title = recipeModel.title,
-        image = recipeModel.image,
-        imageDescription = recipeModel.imageDescription,
+        title = recipe.title,
+        image = recipe.image,
+        imageDescription = recipe.imageDescription,
         modifier = modifier,
         titleSize = titleSize,
         onDelete = onDelete

@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import tandera.hackerspace.midnightcafe.ui.models.RecipeModel
+import tandera.hackerspace.midnightcafe.data.Recipe
 
 @Composable
 fun OnlyTitleRecipeCard(
@@ -33,14 +33,14 @@ fun OnlyTitleRecipeCard(
 
 @Composable
 fun OnlyTitleRecipeCard(
-    recipeModel: RecipeModel,
+    recipe: Recipe,
     modifier: Modifier = Modifier,
     titleSize: TextUnit = TextUnit.Unspecified,
 ) {
     OnlyTitleRecipeCard(
-        title = recipeModel.title,
-        image = recipeModel.image,
-        imageDescription = recipeModel.imageDescription,
+        title = recipe.title,
+        image = recipe.image,
+        imageDescription = recipe.imageDescription,
         modifier = modifier,
         titleSize = titleSize
     )

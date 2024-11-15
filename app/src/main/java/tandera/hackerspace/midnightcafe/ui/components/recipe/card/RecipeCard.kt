@@ -3,6 +3,8 @@ package tandera.hackerspace.midnightcafe.ui.components.recipe.card
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -15,8 +17,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import tandera.hackerspace.midnightcafe.R
+import tandera.hackerspace.midnightcafe.data.Recipe
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
-import tandera.hackerspace.midnightcafe.ui.models.RecipeModel
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
 
 @Composable
@@ -47,16 +49,16 @@ fun RecipeCard(
 
 @Composable
 fun RecipeCard(
-    recipeModel: RecipeModel,
+    recipe: Recipe,
     modifier: Modifier = Modifier,
     titleSize: TextUnit = TextUnit.Unspecified,
     starSize: Dp = 12.dp,
 ) {
     RecipeCard(
-        title = recipeModel.title,
-        score = recipeModel.score,
-        image = recipeModel.image,
-        imageDescription = recipeModel.imageDescription,
+        title = recipe.title,
+        score = recipe.score,
+        image = recipe.image,
+        imageDescription = recipe.imageDescription,
         modifier = modifier,
         titleSize = titleSize,
         starSize = starSize
@@ -65,13 +67,17 @@ fun RecipeCard(
 
 @Composable
 fun SkeletonRecipeCard(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    text: String = "Loading your recipes..."
 ) {
     Box(
-        modifier = modifier.background(Palette.Lavender),
+        modifier = modifier
+            .background(Palette.Lavender)
+            .fillMaxWidth(0.90f)
+            .fillMaxHeight(0.60f),
         contentAlignment = Alignment.Center  // Centers the content
     ) {
-        Text(text = "Loading your recipes...")
+        Text(text = text)
     }
 }
 

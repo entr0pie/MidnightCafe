@@ -1,10 +1,9 @@
-package tandera.hackerspace.midnightcafe.services.http
+package tandera.hackerspace.midnightcafe.util
 
 import tandera.hackerspace.midnightcafe.R
+import tandera.hackerspace.midnightcafe.data.Recipe
 import tandera.hackerspace.midnightcafe.extensions.toRawString
-import tandera.hackerspace.midnightcafe.services.LoopStepper
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
-import tandera.hackerspace.midnightcafe.ui.models.RecipeModel
 
 private val DEFAULT_INGREDIENTS = listOf(
     "3 colheres (sopa) de manteiga",
@@ -29,7 +28,7 @@ private val DEFAULT_INSTRUCTIONS = listOf(
 ).toRawString()
 
 val RECIPES = listOf(
-    RecipeModel(
+    Recipe(
         "Red Velvet",
         Score.FIVE,
         R.drawable.red_velvet,
@@ -38,7 +37,7 @@ val RECIPES = listOf(
         DEFAULT_INSTRUCTIONS,
     ),
 
-    RecipeModel(
+    Recipe(
         "Tiramisu",
         Score.THREE,
         R.drawable.tiramisu,
@@ -47,7 +46,7 @@ val RECIPES = listOf(
         DEFAULT_INSTRUCTIONS
     ),
 
-    RecipeModel(
+    Recipe(
         "Brigadeiro",
         Score.FIVE,
         R.drawable.brigadeiro,
@@ -56,5 +55,3 @@ val RECIPES = listOf(
         DEFAULT_INSTRUCTIONS
     )
 )
-
-class RecipeHttpStepper() : LoopStepper<RecipeModel>(*RECIPES.toTypedArray()) {}

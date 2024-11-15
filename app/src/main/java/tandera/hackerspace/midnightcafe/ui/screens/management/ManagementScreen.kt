@@ -20,10 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import tandera.hackerspace.midnightcafe.services.http.RECIPES
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.TopBarWithArrowBack
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.DeletableRecipeCard
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
+import tandera.hackerspace.midnightcafe.util.RECIPES
 
 @Composable
 fun ManagementScreen(navController: NavController) {
@@ -59,7 +59,7 @@ fun ManagementScreen(navController: NavController) {
                 ) {
                     items(RECIPES) { recipe ->
                         DeletableRecipeCard(
-                            recipeModel = recipe,
+                            recipe = recipe,
                             modifier = Modifier
                                 .height(128.dp)
                                 .padding(0.dp, 2.dp)
