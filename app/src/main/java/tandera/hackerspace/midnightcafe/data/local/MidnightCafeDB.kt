@@ -12,7 +12,5 @@ abstract class MidnightCafeDB : RoomDatabase() {
 
 fun getMidnightCafeDB(ctx: Context): MidnightCafeDB {
     return Room.databaseBuilder(ctx, MidnightCafeDB::class.java, name = "midnight_cafe.db")
-        .fallbackToDestructiveMigrationOnDowngrade()
-        .fallbackToDestructiveMigration()
         .build()
 }

@@ -26,8 +26,6 @@ class RoomRecipeFeedDataSource(private val dao: RecipeFeedDao) : LocalRecipeFeed
     }
 
     override suspend fun insert(recipes: List<Recipe>): Flow<List<Recipe>> {
-        println("Inserindo receitas no banco local!!!!!")
-
         return flow {
             recipes.map {
                 val entity = RecipeFeedEntity.fromRecipe(it)
@@ -39,7 +37,6 @@ class RoomRecipeFeedDataSource(private val dao: RecipeFeedDao) : LocalRecipeFeed
     }
 
     override suspend fun wipe(): Flow<Unit> {
-        println("Limpando a BOSTA do banco local")
         return flow {
             dao.wipe()
             emit(Unit)

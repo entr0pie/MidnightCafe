@@ -9,12 +9,14 @@ private val RECIPE_IMAGES =
     listOf(R.drawable.tiramisu, R.drawable.brigadeiro, R.drawable.red_velvet)
 
 data class RecipeDto(
-    val id: Int? = null,
+    val id: String? = null,
     val title: String,
     val score: Int,
     val ingredients: String,
     val instructions: String,
 ) {
+    
+    constructor() : this(null, "", 0, "", "") {}
 
     fun toRecipe() = Recipe(
         title = this.title,

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "781742755386",
+    "project_id": "midnightcafe-2c115",
+    "storage_bucket": "midnightcafe-2c115.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781742755386:android:737d58782ba8ab447def03",
+        "android_client_info": {
+          "package_name": "tandera.hackerspace.midnightcafe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeoWvVkbLKBn6_WJhnNW8iTSeFFXCUFzI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
