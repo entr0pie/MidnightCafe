@@ -28,6 +28,7 @@ import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 import tandera.hackerspace.midnightcafe.data.recipe.SelectedRecipeViewModel
 import tandera.hackerspace.midnightcafe.data.recipe.feed.RecipeFeedViewModel
 import tandera.hackerspace.midnightcafe.data.recipe.liked.LikedRecipesViewModel
+import tandera.hackerspace.midnightcafe.ui.components.common.ConnectivityStatusBar
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.BottomBar
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.MainTopBar
 import tandera.hackerspace.midnightcafe.ui.components.recipe.buttons.HateItButton
@@ -59,12 +60,17 @@ fun TinderScreen(
     }
 
     Scaffold(
-        topBar = { MainTopBar() },
+        topBar = {
+            MainTopBar()
+        },
         bottomBar = {
-            BottomBar(
-                onProfileClick = { navController.navigate("profile") },
-                onManagementClick = { navController.navigate("management") }
-            )
+            Column {
+                ConnectivityStatusBar()
+                BottomBar(
+                    onProfileClick = { navController.navigate("profile") },
+                    onManagementClick = { navController.navigate("management") }
+                )
+            }
         },
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
