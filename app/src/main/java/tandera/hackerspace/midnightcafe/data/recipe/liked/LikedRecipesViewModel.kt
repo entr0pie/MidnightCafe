@@ -35,4 +35,10 @@ class LikedRecipesViewModel(private val application: Application) : AndroidViewM
             repository.like(recipe).collect()
         }
     }
+
+    fun unlike(recipe: Recipe) {
+        viewModelScope.launch {
+            repository.unlike(recipe).collect()
+        }
+    }
 }

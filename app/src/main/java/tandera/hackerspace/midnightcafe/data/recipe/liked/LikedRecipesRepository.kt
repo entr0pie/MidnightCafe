@@ -17,8 +17,6 @@ class LikedRecipesRepositoryImpl(
 
     override suspend fun like(recipe: Recipe): Flow<Unit> = remote.like(recipe)
 
-    override suspend fun unlike(recipe: Recipe): Flow<Unit> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun unlike(recipe: Recipe): Flow<Unit> = remote.unlike(recipe)
 
 }

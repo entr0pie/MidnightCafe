@@ -1,12 +1,10 @@
 package tandera.hackerspace.midnightcafe.data.recipe.liked
 
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 import tandera.hackerspace.midnightcafe.data.recipe.feed.RecipeDto
@@ -39,37 +37,50 @@ class FirebaseLikedRecipesDataSource(
                 if (data != null) {
                     val recipes = data.documents.mapNotNull {
                         it.toObject(RecipeDto::class.java)
-                    }.map { it.toRecipe() }
+                    }
 
                     LOGGER.i("Receitas recebidas: ${recipes}")
-                    trySend(recipes).isSuccess
+                    trySend(recipes.map { it.toRecipe() }).isSuccess
                 }
             }
             awaitClose { listener.remove() }
         }
 
     }
-
-
-    @OptIn(ExperimentalCoroutinesApi::class)
+    
     override suspend fun like(recipe: Recipe): Flow<Unit> {
-        return this.list()
-            .flatMapLatest { likedRecipes ->
-                val alreadyLiked = likedRecipes.any { one -> areEqual(recipe, one) }
-                if (alreadyLiked) return@flatMapLatest flowOf()
+        val likedRecipes = likedRecipesCollection.get().await().documents.mapNotNull {
+            it.toObject(RecipeDto::class.java)
+        }
 
-                val recipeDto = RecipeDto.fromRecipe(recipe, this.idGenerator.generate())
+        return flow {
+            val alreadyLiked = likedRecipes.any { one -> areEqual(recipe, one.toRecipe()) }
+            if (alreadyLiked) return@flow emit(Unit)
 
-                val document = this.likedRecipesCollection.document(recipeDto.id!!)
-                document.set(recipeDto).await()
+            val recipeDto = RecipeDto.fromRecipe(recipe, idGenerator.generate())
 
-                return@flatMapLatest flowOf()
-            }
+            val document = likedRecipesCollection.document(recipeDto.id!!)
+            document.set(recipeDto).await()
+
+            return@flow emit(Unit)
+        }
 
     }
 
     override suspend fun unlike(recipe: Recipe): Flow<Unit> {
-        TODO("Not yet implemented")
+        val likedRecipes = likedRecipesCollection.get().await().documents.mapNotNull {
+            it.toObject(RecipeDto::class.java)
+        }
+
+        return flow {
+            val likedRecipe =
+                likedRecipes.firstOrNull { one -> areEqual(recipe, one.toRecipe()) }
+
+            if (likedRecipe == null) return@flow emit(Unit)
+
+            likedRecipesCollection.document(likedRecipe.id!!).delete().await()
+            return@flow emit(Unit)
+        }
     }
 
     private companion object {

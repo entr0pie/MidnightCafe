@@ -40,9 +40,9 @@ val CARD_ALIGNMENT: Alignment = BiasAlignment(0f, -0.8f)
 @Composable
 fun TinderScreen(
     navController: NavController,
+    modifier: Modifier = Modifier,
     recipeFeedViewModel: RecipeFeedViewModel = viewModel(),
     likedRecipesViewModel: LikedRecipesViewModel = viewModel(),
-    modifier: Modifier = Modifier
 ) {
     val recipes by recipeFeedViewModel.recipes.collectAsState()
     var currentRecipe by remember { mutableStateOf<Recipe?>(null) }
@@ -90,6 +90,10 @@ fun TinderScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         HateItButton(onClick = {
+                            if (currentRecipe != null) {
+                                likedRecipesViewModel.unlike(currentRecipe!!)
+                            }
+
                             if (index + 1 < recipes.size) {
                                 index += 1 // Move to next recipe
                                 return@HateItButton
