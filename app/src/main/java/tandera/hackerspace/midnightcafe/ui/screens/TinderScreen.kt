@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.ui.screens.tinder
+package tandera.hackerspace.midnightcafe.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -52,10 +52,8 @@ fun TinderScreen(
     var index by remember { mutableStateOf(0) }
 
     if (index in recipes.indices) {
-        println("Atualizando a receita atual: ${index + 1} / ${recipes.size}")
         currentRecipe = recipes[index]
     } else {
-        println("Indice nao esta presente!!! ")
         currentRecipe = null
     }
 
@@ -64,12 +62,12 @@ fun TinderScreen(
             MainTopBar()
         },
         bottomBar = {
-            Column {
-                ConnectivityStatusBar()
+            Column(modifier = Modifier.padding(bottom = 32.dp)) {
                 BottomBar(
                     onProfileClick = { navController.navigate("profile") },
                     onManagementClick = { navController.navigate("management") }
                 )
+                ConnectivityStatusBar()
             }
         },
     ) { innerPadding ->

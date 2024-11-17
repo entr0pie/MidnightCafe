@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.ui.screens.recipe_creation
+package tandera.hackerspace.midnightcafe.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -23,6 +23,7 @@ import androidx.navigation.NavController
 import tandera.hackerspace.midnightcafe.R
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 import tandera.hackerspace.midnightcafe.data.recipe.feed.RecipeFeedViewModel
+import tandera.hackerspace.midnightcafe.ui.components.common.ConnectivityStatusBar
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.TopBarWithArrowBack
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
@@ -49,6 +50,11 @@ fun RecipeCreationScreen(
                 Text(text = "Create a new Recipe")
             }
         },
+        bottomBar = {
+            Column(modifier = Modifier.padding(bottom = 32.dp)) {
+                ConnectivityStatusBar()
+            }
+        }
     ) { innerPadding ->
         Box(
             modifier = Modifier

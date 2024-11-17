@@ -15,11 +15,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import tandera.hackerspace.midnightcafe.data.recipe.SelectedRecipeViewModel
-import tandera.hackerspace.midnightcafe.ui.screens.management.ManagementScreen
-import tandera.hackerspace.midnightcafe.ui.screens.profile.ProfileScreen
-import tandera.hackerspace.midnightcafe.ui.screens.recipe_creation.RecipeCreationScreen
-import tandera.hackerspace.midnightcafe.ui.screens.tinder.RecipeDetailsScreen
-import tandera.hackerspace.midnightcafe.ui.screens.tinder.TinderScreen
+import tandera.hackerspace.midnightcafe.ui.screens.ManagementScreen
+import tandera.hackerspace.midnightcafe.ui.screens.ProfileScreen
+import tandera.hackerspace.midnightcafe.ui.screens.RecipeCreationScreen
+import tandera.hackerspace.midnightcafe.ui.screens.RecipeDetailsScreen
+import tandera.hackerspace.midnightcafe.ui.screens.TinderScreen
 import tandera.hackerspace.midnightcafe.ui.theme.MidnightCafeTheme
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
 
