@@ -1,5 +1,6 @@
 package tandera.hackerspace.midnightcafe.data.recipe.feed
 
+import com.google.firebase.firestore.DocumentId
 import tandera.hackerspace.midnightcafe.R
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
@@ -8,7 +9,7 @@ private val RECIPE_IMAGES =
     listOf(R.drawable.tiramisu, R.drawable.brigadeiro, R.drawable.red_velvet)
 
 data class RecipeDto(
-    val id: String? = null,
+    @DocumentId val id: String?,
     val title: String,
     val score: Int,
     val ingredients: String,

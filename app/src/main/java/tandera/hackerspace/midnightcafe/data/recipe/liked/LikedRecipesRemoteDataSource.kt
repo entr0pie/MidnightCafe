@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 import tandera.hackerspace.midnightcafe.data.recipe.feed.RecipeDto
+import tandera.hackerspace.midnightcafe.extensions.equalsTo
 import tandera.hackerspace.midnightcafe.util.IdGenerator
 import tandera.hackerspace.midnightcafe.util.Logger
 
@@ -47,14 +48,14 @@ class FirebaseLikedRecipesDataSource(
         }
 
     }
-    
+
     override suspend fun like(recipe: Recipe): Flow<Unit> {
         val likedRecipes = likedRecipesCollection.get().await().documents.mapNotNull {
             it.toObject(RecipeDto::class.java)
         }
 
         return flow {
-            val alreadyLiked = likedRecipes.any { one -> areEqual(recipe, one.toRecipe()) }
+            val alreadyLiked = likedRecipes.any { one -> one.toRecipe().equalsTo(recipe) }
             if (alreadyLiked) return@flow emit(Unit)
 
             val recipeDto = RecipeDto.fromRecipe(recipe, idGenerator.generate())
@@ -74,7 +75,7 @@ class FirebaseLikedRecipesDataSource(
 
         return flow {
             val likedRecipe =
-                likedRecipes.firstOrNull { one -> areEqual(recipe, one.toRecipe()) }
+                likedRecipes.firstOrNull { one -> one.toRecipe().equalsTo(recipe) }
 
             if (likedRecipe == null) return@flow emit(Unit)
 
@@ -85,10 +86,6 @@ class FirebaseLikedRecipesDataSource(
 
     private companion object {
         val LOGGER = Logger.fromClass(FirebaseLikedRecipesDataSource::class)
-
-        fun areEqual(left: Recipe, right: Recipe): Boolean {
-            return left.title == right.title && left.score == right.score
-        }
     }
 
 }

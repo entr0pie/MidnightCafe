@@ -5,6 +5,7 @@ import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 
 interface RecipeFeedRepository {
     suspend fun getFeed(): Flow<List<Recipe>>
+    suspend fun delete(recipe: Recipe): Flow<Unit>
 }
 
 class RecipeFeedRepositoryImpl(
@@ -23,4 +24,5 @@ class RecipeFeedRepositoryImpl(
      * @return
      */
     override suspend fun getFeed(): Flow<List<Recipe>> = remote.list()
+    override suspend fun delete(recipe: Recipe): Flow<Unit> = remote.delete(recipe)
 }

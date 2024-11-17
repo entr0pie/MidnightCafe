@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import tandera.hackerspace.midnightcafe.data.getMidnightCafeDB
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
@@ -27,6 +28,12 @@ class RecipeFeedViewModel(application: Application) : AndroidViewModel(applicati
             recipeFeedRepository.getFeed().collect { recipes ->
                 _recipes.value = recipes
             }
+        }
+    }
+
+    fun delete(recipe: Recipe) {
+        viewModelScope.launch {
+            recipeFeedRepository.delete(recipe).collect()
         }
     }
 }

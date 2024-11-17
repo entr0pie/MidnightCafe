@@ -16,17 +16,25 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import tandera.hackerspace.midnightcafe.data.recipe.feed.RecipeFeedViewModel
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.TopBarWithArrowBack
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.DeletableRecipeCard
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
-import tandera.hackerspace.midnightcafe.util.RECIPES
 
 @Composable
-fun ManagementScreen(navController: NavController) {
+fun ManagementScreen(
+    navController: NavController,
+    recipeFeedViewModel: RecipeFeedViewModel = viewModel()
+) {
+    val recipes by recipeFeedViewModel.recipes.collectAsState()
+
     Box(
         modifier = Modifier
             .background(Palette.Lavender)
@@ -57,14 +65,17 @@ fun ManagementScreen(navController: NavController) {
                         .padding(4.dp)
                         .background(Palette.Lavender)
                 ) {
-                    items(RECIPES) { recipe ->
+                    items(recipes) { recipe ->
                         DeletableRecipeCard(
                             recipe = recipe,
                             modifier = Modifier
                                 .height(128.dp)
                                 .padding(0.dp, 2.dp)
                                 .clickable { navController.navigate("details") },
-                            titleSize = 36.sp
+                            titleSize = 36.sp,
+                            onDelete = {
+                                recipeFeedViewModel.delete(recipe)
+                            }
                         )
                     }
                 }
