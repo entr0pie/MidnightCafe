@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.data.local
+package tandera.hackerspace.midnightcafe.data.recipe.local
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -8,7 +8,7 @@ import androidx.room.Query
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 import tandera.hackerspace.midnightcafe.R
-import tandera.hackerspace.midnightcafe.data.Recipe
+import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
 
 

@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.data
+package tandera.hackerspace.midnightcafe.data.recipe
 
 import androidx.annotation.DrawableRes
 import tandera.hackerspace.midnightcafe.ui.components.common.Score

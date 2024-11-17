@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import tandera.hackerspace.midnightcafe.data.Recipe
+import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 
 @Composable
 fun OnlyTitleRecipeCard(

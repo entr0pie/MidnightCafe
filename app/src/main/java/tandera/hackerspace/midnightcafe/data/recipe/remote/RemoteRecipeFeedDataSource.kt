@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.data.remote
+package tandera.hackerspace.midnightcafe.data.recipe.remote
 
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
@@ -6,7 +6,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
-import tandera.hackerspace.midnightcafe.data.Recipe
+import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 import tandera.hackerspace.midnightcafe.util.Logger
 
 interface RemoteRecipeFeedDataSource {

@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import tandera.hackerspace.midnightcafe.data.Recipe
-import tandera.hackerspace.midnightcafe.data.RecipeFeedViewModel
+import tandera.hackerspace.midnightcafe.data.recipe.Recipe
+import tandera.hackerspace.midnightcafe.data.recipe.RecipeFeedViewModel
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.BottomBar
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.MainTopBar
 import tandera.hackerspace.midnightcafe.ui.components.recipe.buttons.HateItButton

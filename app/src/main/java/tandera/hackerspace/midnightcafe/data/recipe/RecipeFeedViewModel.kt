@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.data
+package tandera.hackerspace.midnightcafe.data.recipe
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import tandera.hackerspace.midnightcafe.data.local.RoomRecipeFeedDataSource
-import tandera.hackerspace.midnightcafe.data.local.getMidnightCafeDB
-import tandera.hackerspace.midnightcafe.data.remote.FirebaseRecipeDataSource
+import tandera.hackerspace.midnightcafe.data.recipe.local.RoomRecipeFeedDataSource
+import tandera.hackerspace.midnightcafe.data.recipe.local.getMidnightCafeDB
+import tandera.hackerspace.midnightcafe.data.recipe.remote.FirebaseRecipeDataSource
 
 class RecipeFeedViewModel(application: Application) : AndroidViewModel(application) {
     private val recipeFeedDao = getMidnightCafeDB(application).getRecipeDao();

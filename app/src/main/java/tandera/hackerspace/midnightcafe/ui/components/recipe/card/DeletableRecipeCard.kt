@@ -24,7 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import tandera.hackerspace.midnightcafe.R
-import tandera.hackerspace.midnightcafe.data.Recipe
+import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
 
 @Composable

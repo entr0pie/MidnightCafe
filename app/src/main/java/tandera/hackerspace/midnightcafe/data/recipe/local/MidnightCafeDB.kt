@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.data.local
+package tandera.hackerspace.midnightcafe.data.recipe.local
 
 import android.content.Context
 import androidx.room.Database

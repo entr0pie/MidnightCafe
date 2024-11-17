@@ -1,7 +1,7 @@
 package tandera.hackerspace.midnightcafe.util
 
 import tandera.hackerspace.midnightcafe.R
-import tandera.hackerspace.midnightcafe.data.Recipe
+import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 import tandera.hackerspace.midnightcafe.extensions.toRawString
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
 
