@@ -3,6 +3,7 @@ package tandera.hackerspace.midnightcafe.data.recipe.feed
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -40,7 +41,7 @@ class RecipeFeedViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun create(recipe: Recipe) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             recipeFeedRepository.create(recipe).collect()
         }
     }

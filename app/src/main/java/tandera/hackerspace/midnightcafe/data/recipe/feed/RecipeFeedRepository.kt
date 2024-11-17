@@ -1,6 +1,7 @@
 package tandera.hackerspace.midnightcafe.data.recipe.feed
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.zip
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 
 interface RecipeFeedRepository {
@@ -25,6 +26,9 @@ class RecipeFeedRepositoryImpl(
      * @return
      */
     override suspend fun getFeed(): Flow<List<Recipe>> = remote.list()
-    override suspend fun create(recipe: Recipe): Flow<Unit> = remote.create(recipe)
+    override suspend fun create(recipe: Recipe): Flow<Unit> {
+        return remote.create(recipe).zip(local.insert(recipe)) { _, _ -> Unit }
+    }
+
     override suspend fun delete(recipe: Recipe): Flow<Unit> = remote.delete(recipe)
 }
