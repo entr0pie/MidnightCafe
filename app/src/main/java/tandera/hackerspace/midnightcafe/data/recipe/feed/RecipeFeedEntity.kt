@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.data.recipe.local
+package tandera.hackerspace.midnightcafe.data.recipe.feed
 
 import androidx.room.Dao
 import androidx.room.Delete

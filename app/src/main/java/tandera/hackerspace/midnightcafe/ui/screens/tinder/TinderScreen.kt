@@ -25,7 +25,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
-import tandera.hackerspace.midnightcafe.data.recipe.RecipeFeedViewModel
+import tandera.hackerspace.midnightcafe.data.recipe.feed.RecipeFeedViewModel
+import tandera.hackerspace.midnightcafe.data.recipe.liked.LikedRecipesViewModel
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.BottomBar
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.MainTopBar
 import tandera.hackerspace.midnightcafe.ui.components.recipe.buttons.HateItButton
@@ -39,13 +40,13 @@ val CARD_ALIGNMENT: Alignment = BiasAlignment(0f, -0.8f)
 @Composable
 fun TinderScreen(
     navController: NavController,
-    viewModel: RecipeFeedViewModel = viewModel(),
+    recipeFeedViewModel: RecipeFeedViewModel = viewModel(),
+    likedRecipesViewModel: LikedRecipesViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
-    val recipes by viewModel.recipes.collectAsState()
+    val recipes by recipeFeedViewModel.recipes.collectAsState()
     var currentRecipe by remember { mutableStateOf<Recipe?>(null) }
     var index by remember { mutableStateOf(0) }
-
 
     if (index in recipes.indices) {
         println("Atualizando a receita atual: ${index + 1} / ${recipes.size}")
@@ -97,6 +98,10 @@ fun TinderScreen(
                             currentRecipe = null
                         })
                         LoveItButton(onClick = {
+                            if (currentRecipe != null) {
+                                likedRecipesViewModel.like(currentRecipe!!)
+                            }
+
                             if (index + 1 < recipes.size) {
                                 index += 1 // Move to next recipe
                                 return@LoveItButton

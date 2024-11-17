@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.data.recipe.remote
+package tandera.hackerspace.midnightcafe.data.recipe.feed
 
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
@@ -17,7 +17,7 @@ interface RemoteRecipeFeedDataSource {
 class FirebaseRecipeDataSource : RemoteRecipeFeedDataSource {
 
     private val firestore = FirebaseFirestore.getInstance()
-    private val collection = firestore.collection("midnight-cafe")
+    private val collection = firestore.collection("recipe-feed")
 
     override suspend fun list(): Flow<List<Recipe>> {
         return callbackFlow {

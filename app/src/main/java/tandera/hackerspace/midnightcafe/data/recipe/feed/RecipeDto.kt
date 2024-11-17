@@ -1,8 +1,7 @@
-package tandera.hackerspace.midnightcafe.data.recipe.remote
+package tandera.hackerspace.midnightcafe.data.recipe.feed
 
 import tandera.hackerspace.midnightcafe.R
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
-import tandera.hackerspace.midnightcafe.data.recipe.local.RecipeFeedEntity
 import tandera.hackerspace.midnightcafe.ui.components.common.Score
 
 private val RECIPE_IMAGES =
@@ -28,8 +27,8 @@ data class RecipeDto(
     )
 
     companion object {
-        fun fromRecipe(recipe: Recipe) = RecipeFeedEntity(
-            null,
+        fun fromRecipe(recipe: Recipe, id: String? = null) = RecipeDto(
+            id,
             recipe.title,
             recipe.score.value(),
             recipe.ingredients,

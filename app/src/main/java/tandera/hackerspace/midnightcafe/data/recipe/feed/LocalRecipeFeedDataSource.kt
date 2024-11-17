@@ -1,4 +1,4 @@
-package tandera.hackerspace.midnightcafe.data.recipe.local
+package tandera.hackerspace.midnightcafe.data.recipe.feed
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

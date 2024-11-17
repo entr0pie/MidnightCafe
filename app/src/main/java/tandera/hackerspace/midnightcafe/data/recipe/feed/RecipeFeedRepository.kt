@@ -1,8 +1,7 @@
-package tandera.hackerspace.midnightcafe.data.recipe
+package tandera.hackerspace.midnightcafe.data.recipe.feed
 
 import kotlinx.coroutines.flow.Flow
-import tandera.hackerspace.midnightcafe.data.recipe.local.LocalRecipeFeedDataSource
-import tandera.hackerspace.midnightcafe.data.recipe.remote.RemoteRecipeFeedDataSource
+import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 
 interface RecipeFeedRepository {
     suspend fun getFeed(): Flow<List<Recipe>>

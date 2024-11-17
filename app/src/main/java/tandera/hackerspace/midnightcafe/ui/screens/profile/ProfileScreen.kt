@@ -12,17 +12,23 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import tandera.hackerspace.midnightcafe.data.recipe.liked.LikedRecipesViewModel
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.TopBarWithArrowBack
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.OnlyTitleRecipeCard
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
-import tandera.hackerspace.midnightcafe.util.RECIPES
 
 @Composable
-fun ProfileScreen(navController: NavController) {
+fun ProfileScreen(navController: NavController, viewModel: LikedRecipesViewModel = viewModel()) {
+
+    val recipes by viewModel.likedRecipes.collectAsState()
+
     Box(
         modifier = Modifier
             .background(Palette.Lavender)
@@ -48,7 +54,7 @@ fun ProfileScreen(navController: NavController) {
                         .padding(4.dp)
                         .background(Palette.Lavender)
                 ) {
-                    items(RECIPES) { recipe ->
+                    items(recipes) { recipe ->
                         OnlyTitleRecipeCard(
                             recipe = recipe,
                             modifier = Modifier
