@@ -8,14 +8,17 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
 import tandera.hackerspace.midnightcafe.extensions.equalsTo
+import tandera.hackerspace.midnightcafe.util.IdGenerator
 import tandera.hackerspace.midnightcafe.util.Logger
 
 interface RemoteRecipeFeedDataSource {
     suspend fun list(): Flow<List<Recipe>>
+    suspend fun create(recipe: Recipe): Flow<Unit>
     suspend fun delete(recipe: Recipe): Flow<Unit>
 }
 
-class FirebaseRecipeDataSource : RemoteRecipeFeedDataSource {
+class FirebaseRecipeDataSource(private val idGenerator: IdGenerator) :
+    RemoteRecipeFeedDataSource {
 
     private val firestore = FirebaseFirestore.getInstance()
     private val collection = firestore.collection("recipe-feed")
@@ -41,6 +44,22 @@ class FirebaseRecipeDataSource : RemoteRecipeFeedDataSource {
                 }
             }
             awaitClose { listener.remove() }
+        }
+    }
+
+    override suspend fun create(recipe: Recipe): Flow<Unit> {
+        val recipes =
+            collection.get().await().documents.mapNotNull {
+                it.toObject(RecipeDto::class.java)
+            }
+
+        return flow {
+            val exists = recipes.firstOrNull { one -> one.toRecipe().equalsTo(recipe) } != null
+            if (exists) return@flow emit(Unit)
+
+            val recipeDto = RecipeDto.fromRecipe(recipe, idGenerator.generate())
+            val document = collection.document(recipeDto.id!!)
+            document.set(recipeDto).await()
         }
     }
 

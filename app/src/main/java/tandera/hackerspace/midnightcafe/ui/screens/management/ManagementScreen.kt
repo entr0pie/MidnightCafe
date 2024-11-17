@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import tandera.hackerspace.midnightcafe.data.recipe.feed.RecipeFeedViewModel
+import tandera.hackerspace.midnightcafe.data.recipe.liked.LikedRecipesViewModel
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.TopBarWithArrowBack
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.DeletableRecipeCard
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
@@ -31,7 +32,8 @@ import tandera.hackerspace.midnightcafe.ui.theme.Palette
 @Composable
 fun ManagementScreen(
     navController: NavController,
-    recipeFeedViewModel: RecipeFeedViewModel = viewModel()
+    recipeFeedViewModel: RecipeFeedViewModel = viewModel(),
+    likedRecipesViewModel: LikedRecipesViewModel = viewModel()
 ) {
     val recipes by recipeFeedViewModel.recipes.collectAsState()
 
@@ -49,7 +51,7 @@ fun ManagementScreen(
                 }
             },
             floatingActionButton = {
-                FloatingActionButton(onClick = { }) {
+                FloatingActionButton(onClick = { navController.navigate("create_recipe") }) {
                     Icon(Icons.Default.Add, contentDescription = "Add")
                 }
             }
@@ -75,6 +77,7 @@ fun ManagementScreen(
                             titleSize = 36.sp,
                             onDelete = {
                                 recipeFeedViewModel.delete(recipe)
+                                likedRecipesViewModel.unlike(recipe)
                             }
                         )
                     }

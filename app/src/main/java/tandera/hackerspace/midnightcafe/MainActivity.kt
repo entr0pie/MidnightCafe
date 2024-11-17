@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import tandera.hackerspace.midnightcafe.ui.screens.management.ManagementScreen
 import tandera.hackerspace.midnightcafe.ui.screens.profile.ProfileScreen
+import tandera.hackerspace.midnightcafe.ui.screens.recipe_creation.RecipeCreationScreen
 import tandera.hackerspace.midnightcafe.ui.screens.tinder.RecipeDetailsScreen
 import tandera.hackerspace.midnightcafe.ui.screens.tinder.TinderScreen
 import tandera.hackerspace.midnightcafe.ui.theme.MidnightCafeTheme
@@ -46,5 +47,6 @@ fun NavigationGraph(navController: NavHostController = rememberNavController()) 
         composable("details") { RecipeDetailsScreen(navController) }
         composable("profile") { ProfileScreen(navController) }
         composable("management") { ManagementScreen(navController) }
+        composable("create_recipe") { RecipeCreationScreen(navController) }
     }
 }

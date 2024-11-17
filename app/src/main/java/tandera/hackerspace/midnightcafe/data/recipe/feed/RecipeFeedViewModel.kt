@@ -9,11 +9,13 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import tandera.hackerspace.midnightcafe.data.getMidnightCafeDB
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
+import tandera.hackerspace.midnightcafe.util.SecureIdGenerator
 
 class RecipeFeedViewModel(application: Application) : AndroidViewModel(application) {
-    private val recipeFeedDao = getMidnightCafeDB(application).getRecipeDao();
-    private val localSource = RoomRecipeFeedDataSource(recipeFeedDao);
-    private val remoteSource = FirebaseRecipeDataSource()
+    private val recipeFeedDao = getMidnightCafeDB(application).getRecipeDao()
+    private val localSource = RoomRecipeFeedDataSource(recipeFeedDao)
+    private val idGenerator = SecureIdGenerator()
+    private val remoteSource = FirebaseRecipeDataSource(idGenerator)
     private val recipeFeedRepository = RecipeFeedRepositoryImpl(localSource, remoteSource)
 
     private val _recipes = MutableStateFlow<List<Recipe>>(emptyList())
@@ -34,6 +36,12 @@ class RecipeFeedViewModel(application: Application) : AndroidViewModel(applicati
     fun delete(recipe: Recipe) {
         viewModelScope.launch {
             recipeFeedRepository.delete(recipe).collect()
+        }
+    }
+
+    fun create(recipe: Recipe) {
+        viewModelScope.launch {
+            recipeFeedRepository.create(recipe).collect()
         }
     }
 }
