@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import tandera.hackerspace.midnightcafe.data.recipe.Recipe
+import tandera.hackerspace.midnightcafe.data.recipe.SelectedRecipeViewModel
 import tandera.hackerspace.midnightcafe.data.recipe.feed.RecipeFeedViewModel
 import tandera.hackerspace.midnightcafe.data.recipe.liked.LikedRecipesViewModel
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.BottomBar
@@ -40,6 +41,7 @@ val CARD_ALIGNMENT: Alignment = BiasAlignment(0f, -0.8f)
 @Composable
 fun TinderScreen(
     navController: NavController,
+    selectedRecipeViewModel: SelectedRecipeViewModel,
     modifier: Modifier = Modifier,
     recipeFeedViewModel: RecipeFeedViewModel = viewModel(),
     likedRecipesViewModel: LikedRecipesViewModel = viewModel(),
@@ -78,7 +80,7 @@ fun TinderScreen(
                 ) {
                     Box {
                         if (currentRecipe != null) {
-                            PolishedCard(navController, currentRecipe!!)
+                            PolishedCard(navController, currentRecipe!!, selectedRecipeViewModel)
                         } else {
                             SkeletonRecipeCard(text = "Vamos trazer mais receitas em breve!")
                         }
@@ -125,6 +127,7 @@ fun TinderScreen(
 private fun PolishedCard(
     navController: NavController,
     recipe: Recipe,
+    selectedRecipeViewModel: SelectedRecipeViewModel,
     modifier: Modifier = Modifier
 ) {
     RoundedRecipeCard(
@@ -136,6 +139,7 @@ private fun PolishedCard(
             .fillMaxWidth(0.90f)
             .fillMaxHeight(0.60f)
             .clickable {
+                selectedRecipeViewModel.selectRecipe(recipe)
                 navController.navigate("details")
             },
         titleSize = 32.sp,

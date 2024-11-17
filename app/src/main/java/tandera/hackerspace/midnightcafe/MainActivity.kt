@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import tandera.hackerspace.midnightcafe.data.recipe.SelectedRecipeViewModel
 import tandera.hackerspace.midnightcafe.ui.screens.management.ManagementScreen
 import tandera.hackerspace.midnightcafe.ui.screens.profile.ProfileScreen
 import tandera.hackerspace.midnightcafe.ui.screens.recipe_creation.RecipeCreationScreen
@@ -42,11 +44,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun NavigationGraph(navController: NavHostController = rememberNavController()) {
+    val selectedRecipeViewModel: SelectedRecipeViewModel = viewModel()
+
     NavHost(navController = navController, startDestination = "tinder") {
-        composable("tinder") { TinderScreen(navController) }
-        composable("details") { RecipeDetailsScreen(navController) }
-        composable("profile") { ProfileScreen(navController) }
-        composable("management") { ManagementScreen(navController) }
+        composable("tinder") { TinderScreen(navController, selectedRecipeViewModel) }
+        composable("details") { RecipeDetailsScreen(navController, selectedRecipeViewModel) }
+        composable("profile") { ProfileScreen(navController, selectedRecipeViewModel) }
+        composable("management") { ManagementScreen(navController, selectedRecipeViewModel) }
         composable("create_recipe") { RecipeCreationScreen(navController) }
     }
 }

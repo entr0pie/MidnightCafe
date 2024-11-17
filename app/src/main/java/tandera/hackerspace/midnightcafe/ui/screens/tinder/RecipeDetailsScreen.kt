@@ -16,8 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import tandera.hackerspace.midnightcafe.R
-import tandera.hackerspace.midnightcafe.ui.components.common.Score
+import tandera.hackerspace.midnightcafe.data.recipe.Recipe
+import tandera.hackerspace.midnightcafe.data.recipe.SelectedRecipeViewModel
+import tandera.hackerspace.midnightcafe.extensions.toRawList
 import tandera.hackerspace.midnightcafe.ui.components.common.VerticalList
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.TopBarWithArrowBack
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.RecipeCard
@@ -26,14 +27,22 @@ import tandera.hackerspace.midnightcafe.ui.models.RecipeCommentModel
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
 
 @Composable
-fun RecipeDetailsScreen(navController: NavController) {
+fun RecipeDetailsScreen(
+    navController: NavController,
+    selectedRecipeViewModel: SelectedRecipeViewModel,
+) {
+    val recipe = selectedRecipeViewModel.selectedRecipe.value
+    if (recipe == null) {
+        navController.popBackStack()
+        return
+    }
 
     Scaffold(
         topBar = {
             TopBarWithArrowBack(onReturnClick = {
                 navController.popBackStack()
             }) {
-                Text(text = "Recipe: Red Velvet")
+                Text(text = "Recipe: ${recipe.title}")
             }
         },
     ) { innerPadding ->
@@ -51,10 +60,7 @@ fun RecipeDetailsScreen(navController: NavController) {
                             .fillMaxHeight(0.40f)
                     ) {
                         RecipeCard(
-                            "Red Velvet",
-                            Score.FIVE,
-                            R.drawable.red_velvet,
-                            "A sliced piece of Red Velvet.",
+                            recipe,
                             titleSize = 32.sp,
                             starSize = 18.dp
                         )
@@ -62,8 +68,8 @@ fun RecipeDetailsScreen(navController: NavController) {
                 }
 
                 item { CommentCarousel() }
-                item { IngredientsList() }
-                item { RecipeStepsList() }
+                item { IngredientsList(recipe) }
+                item { RecipeStepsList(recipe) }
             }
         }
     }
@@ -93,18 +99,9 @@ fun CommentCarousel() {
 }
 
 @Composable
-fun IngredientsList() {
-    val ingredients = listOf(
-        "3 colheres (sopa) de manteiga",
-        "2 e 1/2 colheres (sopa) de chocolate em pó",
-        "4 ovos",
-        "1 xícara e 1/2 colher (sopa) de farinha de trigo",
-        "1/2 colher (chá) de vinagre branco",
-        "100 ml de leite aquecido",
-        "1 e 1/2 colher (sopa) de corante vermelho em gel",
-        "1 e 1/4 de xícara de açúcar",
-        "1/2 colher (sopa) de fermento em pó",
-    )
+fun IngredientsList(recipe: Recipe) {
+
+    val ingredients = recipe.ingredients.toRawList()
 
     VerticalList(
         modifier = Modifier
@@ -118,16 +115,8 @@ fun IngredientsList() {
 }
 
 @Composable
-fun RecipeStepsList() {
-    val steps = listOf(
-        "Despeje o leite já aquecido na panela, acrescente a manteiga e misture.",
-        "Coloque o chocolate em pó e deixe em fogo médio até a manteiga derreter completamente.",
-        "Desligue o fogo, coloque o corante, misture e reserve.",
-        "Na batedeira, despeje os ovos e o açúcar a bata até dobrar de volume.",
-        "Adicione o farinha e o fermento e misture bem.",
-        "Depois, acrescente a mistura com a corante aos poucos e mexa mais.",
-        "Despeje a massa numa forma redonda e leve ao forno preaquecido a 180 graus por 40 minutos."
-    )
+fun RecipeStepsList(recipe: Recipe) {
+    val steps = recipe.instructions.toRawList()
 
     VerticalList(
         modifier = Modifier

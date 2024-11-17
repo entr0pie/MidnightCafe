@@ -19,14 +19,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import tandera.hackerspace.midnightcafe.data.recipe.SelectedRecipeViewModel
 import tandera.hackerspace.midnightcafe.data.recipe.liked.LikedRecipesViewModel
 import tandera.hackerspace.midnightcafe.ui.components.common.bars.TopBarWithArrowBack
 import tandera.hackerspace.midnightcafe.ui.components.recipe.card.OnlyTitleRecipeCard
 import tandera.hackerspace.midnightcafe.ui.theme.Palette
 
 @Composable
-fun ProfileScreen(navController: NavController, viewModel: LikedRecipesViewModel = viewModel()) {
-
+fun ProfileScreen(
+    navController: NavController,
+    selectedRecipeViewModel: SelectedRecipeViewModel,
+    viewModel: LikedRecipesViewModel = viewModel()
+) {
     val recipes by viewModel.likedRecipes.collectAsState()
 
     Box(
@@ -60,7 +64,10 @@ fun ProfileScreen(navController: NavController, viewModel: LikedRecipesViewModel
                             modifier = Modifier
                                 .height(128.dp)
                                 .padding(0.dp, 2.dp)
-                                .clickable { navController.navigate("details") },
+                                .clickable {
+                                    selectedRecipeViewModel.selectRecipe(recipe)
+                                    navController.navigate("details")
+                                },
                             titleSize = 36.sp
                         )
                     }

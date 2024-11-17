@@ -6,6 +6,10 @@ fun List<String>.toRawString(): String {
     return this.joinToString(separator = "\n")
 }
 
+fun String.toRawList(): List<String> {
+    return this.split("\n")
+}
+
 fun Recipe.equalsTo(other: Recipe): Boolean {
     return this.title == other.title && this.score == other.score
 }
